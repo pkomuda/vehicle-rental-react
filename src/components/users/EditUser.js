@@ -11,7 +11,7 @@ class EditUser extends React.Component {
         this.state = {
             user: {},
             permissions: {"CLIENT": false, "MANAGER": false, "ADMIN": false},
-            valid: {"login": true, "password": true, "email": true, "firstName": true, "lastName": true},
+            valid: {"username": true, "password": true, "email": true, "firstName": true, "lastName": true},
             loaded: false
         };
         this.emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,14 +34,14 @@ class EditUser extends React.Component {
             }).catch(error => {
                 alert(error.response.data);
                 this.props.history.goBack();
-            });
+        });
     };
 
     validateProperty = (property) => {
         let tempValid = {...this.state.valid};
         switch (property) {
-            case "login":
-                tempValid["login"] = document.getElementById("login").value.length !== 0;
+            case "username":
+                tempValid["username"] = document.getElementById("username").value.length !== 0;
                 break;
             case "password":
                 tempValid["password"] = document.getElementById("password").value.length >= 8;
@@ -83,7 +83,7 @@ class EditUser extends React.Component {
     checkValidation = () => {
         let validated = true;
         let tempValid = {...this.state.valid};
-        tempValid["login"] = document.getElementById("login").value.length !== 0;
+        tempValid["username"] = document.getElementById("username").value.length !== 0;
         tempValid["password"] = document.getElementById("password").value.length >= 8;
         tempValid["email"] = this.emailRegex.test(document.getElementById("email").value);
         tempValid["firstName"] = document.getElementById("firstName").value.length !== 0;
@@ -123,7 +123,7 @@ class EditUser extends React.Component {
                     alert(response.data);
                     this.props.history.push("/listusers");
                 }).catch(error => {
-                alert(error.response.data);
+                    alert(error.response.data);
             });
         } else {
             alert(message);
@@ -144,7 +144,7 @@ class EditUser extends React.Component {
                     <Form>
                         <FormGroup>
                             <FormLabel>Username</FormLabel>
-                            <FormControl id="login" value={this.state.user["login"]} onChange={(event) => this.handleChangeProperty(event, "login")} isInvalid={!this.state.valid["login"]}/>
+                            <FormControl id="username" value={this.state.user["username"]} onChange={(event) => this.handleChangeProperty(event, "username")} isInvalid={!this.state.valid["username"]}/>
                             <FormControl.Feedback id="control" type="invalid">Please provide a username.</FormControl.Feedback>
                         </FormGroup>
 

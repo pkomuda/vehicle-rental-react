@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import Sidebar from "./components/utils/Sidebar";
 import Jumbotron from "./components/utils/Jumbotron";
 import NotFound from "./components/main/NotFound";
+import Private from "./components/main/Private";
 import Home from "./components/main/Home";
 import Login from "./components/main/Login";
 import Register from "./components/main/Register";

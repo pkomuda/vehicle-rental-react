@@ -13,7 +13,7 @@ let jwt = require("jsonwebtoken");
 
 export const jwtHeader = () => {
     if (cookies.get("jwt") != null) {
-        return {"headers": {"Authorization": "Bearer " + cookies.get("jwt")}};
+        return {"headers": {"Authorization": cookies.get("jwt")}};
     }
 };
 

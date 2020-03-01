@@ -17,16 +17,16 @@ class ListUsers extends React.Component {
     }
 
     editButtonFormatter = (cell, row) => {
-        const handleEdit = (login) => {
-            this.props.history.push("/edituser/" + login);
+        const handleEdit = (username) => {
+            this.props.history.push("/edituser/" + username);
         };
-        return <Button onClick={() => handleEdit(row["login"])}>Edit</Button>;
+        return <Button onClick={() => handleEdit(row["username"])}>Edit</Button>;
     };
 
     deleteButtonFormatter = (cell, row) => {
-        const handleDelete = (login) => {
-            if (window.confirm("Do you really want to delete user: " + login + "?")) {
-                axios.delete("/account/" + login, jwtHeader())
+        const handleDelete = (username) => {
+            if (window.confirm("Do you really want to delete user " + username + "?")) {
+                axios.delete("/account/" + username, jwtHeader())
                     .then(response => {
                         axios.get("/accounts", jwtHeader())
                             .then(response => {
@@ -34,10 +34,10 @@ class ListUsers extends React.Component {
                             });
                     }).catch(error => {
                         alert(error.response.data);
-                    });
+                });
             }
         };
-        return <Button onClick={() => handleDelete(row["login"])}>Delete</Button>;
+        return <Button onClick={() => handleDelete(row["username"])}>Delete</Button>;
     };
 
     componentDidMount = () => {
@@ -46,7 +46,7 @@ class ListUsers extends React.Component {
                 this.setState({
                     users: response.data,
                     columns: [{
-                        dataField: "login",
+                        dataField: "username",
                         text: 'Username',
                         sort: true
                     }, {
@@ -92,7 +92,7 @@ class ListUsers extends React.Component {
         if (this.state.loaded) {
             return (
                 <div>
-                    <Table keyField="login" data={this.state.users} columns={this.state.columns}/>
+                    <Table keyField="username" data={this.state.users} columns={this.state.columns}/>
                     <hr/>
                     <CenterButton onClick={this.handleAdd} text="Add User"/>
                 </div>

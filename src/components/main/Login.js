@@ -9,8 +9,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {"login": "", "password": ""},
-            valid: {"login": true, "password": true}
+            user: {"username": "", "password": ""},
+            valid: {"username": true, "password": true}
         };
         this.cookies = new Cookies();
     }
@@ -18,8 +18,8 @@ class Login extends React.Component {
     validateProperty = (property) => {
         let tempValid = {...this.state.valid};
         switch (property) {
-            case "login":
-                tempValid["login"] = document.getElementById("login").value.length !== 0;
+            case "username":
+                tempValid["username"] = document.getElementById("username").value.length !== 0;
                 break;
             case "password":
                 tempValid["password"] = document.getElementById("password").value.length >= 8;
@@ -40,7 +40,7 @@ class Login extends React.Component {
     checkValidation = () => {
         let validated = true;
         let tempValid = {...this.state.valid};
-        tempValid["login"] = document.getElementById("login").value.length !== 0;
+        tempValid["username"] = document.getElementById("username").value.length !== 0;
         tempValid["password"] = document.getElementById("password").value.length >= 8;
         for (let key in tempValid) {
             if (tempValid.hasOwnProperty(key) && tempValid[key] === false) {
@@ -74,7 +74,7 @@ class Login extends React.Component {
                 <Form>
                     <FormGroup>
                         <FormLabel>Username</FormLabel>
-                        <FormControl id="login" value={this.state.user["login"]} onChange={(event) => this.handleChangeProperty(event, "login")} isInvalid={!this.state.valid["login"]}/>
+                        <FormControl id="username" value={this.state.user["username"]} onChange={(event) => this.handleChangeProperty(event, "username")} isInvalid={!this.state.valid["username"]}/>
                         <FormControl.Feedback id="control" type="invalid">Please provide a username.</FormControl.Feedback>
                     </FormGroup>
 
